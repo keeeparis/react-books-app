@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { RootState } from '../store/store'
 
 export const booksApi = createApi({
   reducerPath: 'booksApi',
@@ -8,15 +9,17 @@ export const booksApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: (data) => {
-        return `volumes?q=${data.input}&startIndex=${data.page}&maxResults=30`
+        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30`
       },
-    }),
-    getBooks1: builder.mutation({
-      query: (data) => {
-        return `volumes?q=${data.input}&startIndex=${data.page}&maxResults=30`
+      async onQueryStarted(arg, dis) {
+        const state = dis.getState() as RootState
+        if (state.main.startIndex !== 1) {
+          // console.log()
+          // console.log(dis)
+        }
       },
     }),
   }),
 })
 
-export const { useGetBooksQuery, useGetBooks1Mutation } = booksApi
+export const { useGetBooksQuery } = booksApi

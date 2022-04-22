@@ -1,17 +1,21 @@
 import React from 'react'
-import { useAppDispatch } from './redux/hooks/hooks'
-import { updatePage } from './redux/mainFeature/mainSlice'
+import { useAppDispatch, useAppSelector } from './redux/hooks/hooks'
+import {
+  incrementStartIndex,
+  selectAreMoreResults,
+} from './redux/mainFeature/mainSlice'
 import BookList from './containers/BookList'
 import Form from './containers/Form'
 
-const BOOKS_PER_PAGE = 30
+const BOOKS_PER_StartIndex = 30
 
 const App = () => {
   const dispatch = useAppDispatch()
+  const areMoreResults = useAppSelector(selectAreMoreResults)
 
-  const onNextPage = () => {
+  const onNextStartIndex = () => {
     // количество отображаемых записей на странице
-    dispatch(updatePage(BOOKS_PER_PAGE))
+    dispatch(incrementStartIndex(BOOKS_PER_StartIndex))
   }
 
   return (
@@ -20,7 +24,9 @@ const App = () => {
 
       <BookList />
 
-      <button onClick={onNextPage}>Следующая страница</button>
+      {areMoreResults && (
+        <button onClick={onNextStartIndex}>Следующая страница</button>
+      )}
     </div>
   )
 }

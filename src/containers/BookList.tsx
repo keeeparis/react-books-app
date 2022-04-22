@@ -1,32 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
+import useBooks from '../hooks/useBooks'
 import { useAppSelector } from '../redux/hooks/hooks'
 import {
   selectInput,
-  selectPage,
+  selectStartIndex,
   selectSkip,
 } from '../redux/mainFeature/mainSlice'
 import { useGetBooksQuery } from '../redux/services/books'
 
 const BookList = () => {
-  const [books, setBooks] = useState<any>([])
-
-  const page = useAppSelector(selectPage)
+  const startIndex = useAppSelector(selectStartIndex)
   const input = useAppSelector(selectInput)
   const isSkip = useAppSelector(selectSkip)
 
   const { data, isLoading, isFetching, isSuccess, isUninitialized, isError } =
-    useGetBooksQuery(
-      { input, page },
-      {
-        skip: isSkip,
-      }
-    )
+    useGetBooksQuery({ input, startIndex }, { skip: isSkip })
 
-  useEffect(() => {
-    if (data?.items.length) {
-      setBooks([...books, ...data.items])
-    }
-  }, [data])
+  const { books } = useBooks(data, startIndex)
 
   return (
     <div>
@@ -42,7 +32,11 @@ const BookList = () => {
         <div>Давай, смелее!</div>
       ) : isError ? (
         <div>Произошла Ошибка</div>
-      ) : null}
+      ) : (
+        !books.length && (
+          <div>Мы не смогли найти ни одной книги по вашему запросу.</div>
+        )
+      )}
     </div>
   )
 }
