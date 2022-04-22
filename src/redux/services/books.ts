@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { resetBooks } from '../mainFeature/mainSlice'
 import { RootState } from '../store/store'
 
 export const booksApi = createApi({
@@ -11,11 +12,13 @@ export const booksApi = createApi({
       query: (data) => {
         return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30`
       },
-      async onQueryStarted(arg, dis) {
-        const state = dis.getState() as RootState
-        if (state.main.startIndex !== 1) {
-          // console.log()
-          // console.log(dis)
+      async onQueryStarted(data, { dispatch, getState }) {
+        const state = getState() as RootState
+        // При отправки формы startIndex-у присваивается значение 1.
+        // Это позволяет очистить массив и показать пустой экран
+        // при новом поиске.
+        if (state.main.startIndex === 1) {
+          dispatch(resetBooks())
         }
       },
     }),
