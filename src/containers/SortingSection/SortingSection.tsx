@@ -1,38 +1,34 @@
 import React, { ChangeEvent } from 'react'
+import Select from '../../components/Select'
 import { categories, sorting } from '../../mock'
-import { useAppDispatch } from '../../redux/hooks/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
 import {
   updateCategory,
   updateSorting,
 } from '../../redux/mainFeature/mainSlice'
+import {
+  selectCategory,
+  selectSorting,
+} from '../../redux/mainFeature/selectors'
+import styles from './SortingSection.module.scss'
 
 const SortingSection = () => {
   const dispatch = useAppDispatch()
+  const category = useAppSelector(selectCategory)
+  const sort = useAppSelector(selectSorting)
 
-  const onCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateCategory(e.target.value))
+  const onCategoryChange = (option: string) => {
+    dispatch(updateCategory(option))
   }
 
-  const onSortingChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateSorting(e.target.value))
+  const onSortingChange = (option: string) => {
+    dispatch(updateSorting(option))
   }
 
   return (
-    <div>
-      <select name="category" id="category" onChange={onCategoryChange}>
-        {categories.map((category) => (
-          <option value={category} key={category}>
-            {category.toUpperCase()}
-          </option>
-        ))}
-      </select>
-      <select name="sorting" id="sorting" onChange={onSortingChange}>
-        {sorting.map((sort) => (
-          <option value={sort} key={sort}>
-            {sort.toUpperCase()}
-          </option>
-        ))}
-      </select>
+    <div className={styles.wrapper}>
+      <Select data={categories} onClick={onCategoryChange} value={category} />
+      <Select data={sorting} onClick={onSortingChange} value={sort} />
     </div>
   )
 }

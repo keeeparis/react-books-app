@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
+import Input from '../../components/Input'
 import { useAppDispatch } from '../../redux/hooks/hooks'
 import { updateInputAndResetIndex } from '../../redux/mainFeature/mainSlice'
+import styles from './Form.module.scss'
 
 const Form = () => {
   const [input, setInput] = useState('')
@@ -17,10 +19,10 @@ const Form = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <input type="text" onChange={onInputChange} value={input} />
-        <button type="submit" disabled={!input}>
-          Отправить
+      <form onSubmit={onSubmit} className={styles.form}>
+        <Input type="text" onChange={onInputChange} value={input} />
+        <button type="submit" disabled={!input} className={styles.button}>
+          Поиск
         </button>
       </form>
     </div>
