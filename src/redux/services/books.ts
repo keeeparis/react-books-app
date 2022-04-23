@@ -10,7 +10,7 @@ export const booksApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: (data) => {
-        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30`
+        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30&orderBy=${data.sorting}`
       },
       async onQueryStarted(data, { dispatch, getState }) {
         const state = getState() as RootState

@@ -4,6 +4,7 @@ import {
   addBooks,
   selectInput,
   selectSkip,
+  selectSorting,
   selectStartIndex,
   updateTotalItemsResponse,
 } from '../redux/mainFeature/mainSlice'
@@ -13,11 +14,12 @@ const useBooks = () => {
   const startIndex = useAppSelector(selectStartIndex)
   const input = useAppSelector(selectInput)
   const isSkip = useAppSelector(selectSkip)
+  const sorting = useAppSelector(selectSorting)
 
   const dispatch = useAppDispatch()
 
   const { data, isLoading, isFetching, isSuccess, isUninitialized, isError } =
-    useGetBooksQuery({ input, startIndex }, { skip: isSkip })
+    useGetBooksQuery({ input, startIndex, sorting }, { skip: isSkip })
 
   useEffect(() => {
     const isData = data?.items && data.items.length
@@ -26,6 +28,7 @@ const useBooks = () => {
     }
 
     if (data && data.hasOwnProperty('totalItems'))
+      // обновление проходит каждый раз, хотя можно только в первый раз
       dispatch(updateTotalItemsResponse(data.totalItems))
   }, [data])
 
