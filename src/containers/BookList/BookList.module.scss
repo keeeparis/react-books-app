@@ -1,0 +1,24 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  gap: 15px;
+  grid-auto-rows: minmax(400px, auto);
+}
+
+@media (max-width: 1276px) {
+  .list {
+    grid-template-columns: repeat(3, 300px);
+  }
+}
+
+@media (max-width: 973px) {
+  .list {
+    grid-template-columns: repeat(2, 300px);
+  }
+}
+
+@media (max-width: 660px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}
