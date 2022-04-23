@@ -1,0 +1,32 @@
+.Container {
+  position: sticky;
+  top: 0;
+  min-height: 60px;
+  background-color: var(--color-2);
+  display: flex;
+}
+
+.Wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 80px;
+  font-weight: 400;
+  flex: 1;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.Up {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

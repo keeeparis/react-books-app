@@ -1,12 +1,14 @@
 import React from 'react'
-import { BOOKS_PER_PAGE } from '../App'
-import useBooks from '../hooks/useBooks'
-import { useAppDispatch, useAppSelector } from '../redux/hooks/hooks'
+import Spinner from '../../components/Spinner'
+import useBooks from '../../hooks/useBooks'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
 import {
   incrementStartIndex,
-  selectAreMoreResults,
   selectCategorizedBooks,
-} from '../redux/mainFeature/mainSlice'
+} from '../../redux/mainFeature/mainSlice'
+import { selectAreMoreResults } from '../../redux/mainFeature/selectors'
+
+export const BOOKS_PER_PAGE = 30
 
 const LoadingSection = () => {
   const books = useAppSelector(selectCategorizedBooks)
@@ -23,12 +25,15 @@ const LoadingSection = () => {
 
   return (
     <>
-      {isFetching ? (
-        <div>LOADING...</div>
-      ) : isUninitialized ? (
-        <div>Давай, смелее!</div>
+      {isUninitialized ? (
+        <div>Поиск книг!</div>
+      ) : isFetching ? (
+        <Spinner />
       ) : isError ? (
-        <div>Произошла Ошибка</div>
+        <div>
+          Произошла Ошибка. Попробуйте ввести запрос иначе или попробуйте
+          позднее. {'>'}:
+        </div>
       ) : !books.length ? (
         <div>Мы не смогли найти ни одной книги по вашему запросу.</div>
       ) : areMoreResults ? (

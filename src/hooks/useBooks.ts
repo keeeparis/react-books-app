@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/hooks/hooks'
 import {
   addBooks,
-  selectInput,
-  selectSkip,
-  selectSorting,
-  selectStartIndex,
   updateTotalItemsResponse,
 } from '../redux/mainFeature/mainSlice'
+import {
+  selectInput,
+  selectStartIndex,
+  selectSkip,
+  selectSorting,
+} from '../redux/mainFeature/selectors'
 import { useGetBooksQuery } from '../redux/services/books'
 
 const useBooks = () => {
@@ -22,14 +24,10 @@ const useBooks = () => {
     useGetBooksQuery({ input, startIndex, sorting }, { skip: isSkip })
 
   useEffect(() => {
-    const isData = data?.items && data.items.length
-    if (isData) {
-      dispatch(addBooks(data.items))
-    }
+    const isData = data && data.items && data.items.length
 
-    if (data && data.hasOwnProperty('totalItems'))
-      // обновление проходит каждый раз, хотя можно только в первый раз
-      dispatch(updateTotalItemsResponse(data.totalItems))
+    if (isData) dispatch(addBooks(data.items))
+    if (data) dispatch(updateTotalItemsResponse(data.totalItems))
   }, [data])
 
   return { isFetching, isUninitialized, isError }

@@ -1,7 +1,10 @@
 import React, { ChangeEvent } from 'react'
-import { categories, sorting } from '../mock'
-import { useAppDispatch } from '../redux/hooks/hooks'
-import { updateCategory, updateSorting } from '../redux/mainFeature/mainSlice'
+import { categories, sorting } from '../../mock'
+import { useAppDispatch } from '../../redux/hooks/hooks'
+import {
+  updateCategory,
+  updateSorting,
+} from '../../redux/mainFeature/mainSlice'
 
 const SortingSection = () => {
   const dispatch = useAppDispatch()

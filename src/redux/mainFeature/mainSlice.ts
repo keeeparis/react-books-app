@@ -1,6 +1,7 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store/store'
 import { Category, mainState, Sorting } from '../types'
+import { selectAllBooks } from './selectors'
 
 const initialState: mainState = {
   startIndex: 1,
@@ -31,16 +32,17 @@ export const mainSlice = createSlice({
       state.startIndex += action.payload
     },
     updateTotalItemsResponse: (state, action) => {
-      state.totalItems = action.payload
+      // Обновление общего количества результатов только при новом запросе.
+      if (state.startIndex === 1) {
+        state.totalItems = action.payload
+      }
     },
     addBooks: (state, action) => {
-      // Если это первый запрос по заданному поиску,
       if (state.startIndex === 1) {
-        // то полученные данные будут новым массивом books.
-        state.books = action.payload
+        // Если это первый запрос по заданному поиску,
+        state.books = action.payload // то полученные данные будут новым массивом books.
       } else {
-        // Иначе, добавь к имеющимся полученные данные в массив books.
-        state.books = [...state.books, ...action.payload]
+        state.books = [...state.books, ...action.payload] // Иначе, добавь к имеющимся полученные данные в массив books.
       }
     },
     resetBooks: (state) => {
@@ -70,16 +72,6 @@ export const {
 } = mainSlice.actions
 
 export default mainSlice.reducer
-
-export const selectStartIndex = (state: RootState) => state.main.startIndex
-export const selectSkip = (state: RootState) => state.main.skip
-export const selectInput = (state: RootState) => state.main.input
-export const selectAllBooks = (state: RootState) => state.main.books
-export const selectCategory = (state: RootState) => state.main.category
-export const selectSorting = (state: RootState) => state.main.sorting
-
-export const selectAreMoreResults = (state: RootState) =>
-  state.main.totalItems > state.main.startIndex + 30
 
 export const selectCategorizedBooks = createSelector(
   selectAllBooks,

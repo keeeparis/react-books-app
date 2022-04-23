@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { useAppDispatch } from '../redux/hooks/hooks'
-import { updateInputAndResetIndex } from '../redux/mainFeature/mainSlice'
+import { useAppDispatch } from '../../redux/hooks/hooks'
+import { updateInputAndResetIndex } from '../../redux/mainFeature/mainSlice'
 
 const Form = () => {
   const [input, setInput] = useState('')
@@ -16,12 +16,14 @@ const Form = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type="text" onChange={onInputChange} value={input} />
-      <button type="submit" disabled={!input}>
-        Отправить
-      </button>
-    </form>
+    <div>
+      <form onSubmit={onSubmit}>
+        <input type="text" onChange={onInputChange} value={input} />
+        <button type="submit" disabled={!input}>
+          Отправить
+        </button>
+      </form>
+    </div>
   )
 }
 
