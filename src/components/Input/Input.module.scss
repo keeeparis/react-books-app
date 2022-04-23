@@ -1,0 +1,43 @@
+.input {
+  border: none;
+  appearance: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 10px 20px 10px 30px;
+  position: relative;
+
+  &:focus-within,
+  &:focus-visible {
+    border: none;
+    outline: none;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  &::after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 13px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid black;
+    transform: rotate(-45deg);
+  }
+
+  &::before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: 17px;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    // transform: rotate(90deg);
+  }
+}

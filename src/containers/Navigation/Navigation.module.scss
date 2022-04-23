@@ -4,6 +4,8 @@
   min-height: 60px;
   background-color: var(--color-2);
   display: flex;
+  z-index: 2;
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
 }
 
 .Wrapper {
