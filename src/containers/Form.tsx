@@ -9,15 +9,6 @@ const Form = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(updateInputAndResetIndex(input))
-    /*  FIXME: 
-      Если загрузить больше данных, а потом опять отправить форму с инпутом
-      (инпут не reset-ается), то из-за resetIndex, идет запрос опять первых 30.
-      Данные кэшируется, поэтому показывает быстро, но так не должно быть. 
-
-      -> Ресет инпута после каждого удачного?! запроса. 
-      -> Проверка на одинаковость в action-e и если да, то не менять инпут, 
-          и тем самым не триггерить rtk query.
-    */
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {

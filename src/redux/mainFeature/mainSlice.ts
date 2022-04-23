@@ -20,8 +20,12 @@ export const mainSlice = createSlice({
       if (state.skip) {
         state.skip = false // Чтобы активировать rtk query
       }
-      state.startIndex = 1
-      state.input = action.payload
+      // Если введенный инпут отличается от предыдущего,
+      // то обновляем индекс и state.input -> срабатывает rtk query
+      if (state.input !== action.payload) {
+        state.startIndex = 1
+        state.input = action.payload
+      } // иначе ничего не делаем -> не срабатывает rtk query
     },
     incrementStartIndex: (state, action) => {
       state.startIndex += action.payload
@@ -30,12 +34,12 @@ export const mainSlice = createSlice({
       state.totalItems = action.payload
     },
     addBooks: (state, action) => {
-      // Если это первый запрос по заданному поиске,
+      // Если это первый запрос по заданному поиску,
       if (state.startIndex === 1) {
         // то полученные данные будут новым массивом books.
         state.books = action.payload
       } else {
-        // Иначе, добавь к имеющимся полученные данные в массив books
+        // Иначе, добавь к имеющимся полученные данные в массив books.
         state.books = [...state.books, ...action.payload]
       }
     },
