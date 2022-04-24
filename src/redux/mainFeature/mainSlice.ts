@@ -86,3 +86,10 @@ export const selectCategorizedBooks = createSelector(
     return newBooks
   }
 )
+
+export const selectBookById = createSelector(
+  [selectAllBooks, (state: RootState, id: any) => id],
+  (books: any, id: string) => {
+    return books.filter((book: any) => book.id === id)
+  }
+)
