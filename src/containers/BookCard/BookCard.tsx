@@ -1,7 +1,8 @@
 import React from 'react'
-import styles from './BookItem.module.scss'
+import { Link } from 'react-router-dom'
+import styles from './BookCard.module.scss'
 
-const BookItem = React.memo(({ book }: { book: any }) => {
+const BookItem = React.memo(({ book, id }: { book: any; id: string }) => {
   const category = book.categories ? book.categories[0] : <> &nbsp;</>
 
   const image = book.imageLinks ? (
@@ -19,13 +20,17 @@ const BookItem = React.memo(({ book }: { book: any }) => {
       </div>
     ))
 
+  // console.log(book)
+
   return (
-    <div className={styles.container}>
-      <div className={styles.imageWrapper}>{image}</div>
-      <div className={styles.category}>{category}</div>
-      <div className={styles.title}>{book.title}</div>
-      <div className={styles.authorWrapper}>{authors}</div>
-    </div>
+    <Link to={`/book/${id}`}>
+      <div className={styles.container}>
+        <div className={styles.imageWrapper}>{image}</div>
+        <div className={styles.category}>{category}</div>
+        <div className={styles.title}>{book.title}</div>
+        <div className={styles.authorWrapper}>{authors}</div>
+      </div>
+    </Link>
   )
 })
 
