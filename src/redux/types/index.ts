@@ -3,9 +3,29 @@ export interface mainState {
   skip: boolean
   input: string
   totalItems: number
-  books: any[]
+  books: Book[]
   category: Category
   sorting: Sorting
+}
+
+export interface Book {
+  etag: string
+  id: string
+  volumeInfo: volumeInfo
+}
+
+export interface volumeInfo {
+  authors?: string[]
+  imageLinks?: {
+    smallThumbnail: string
+    thumbnail: string
+  }
+  categories?: string[]
+  pageCount?: number
+  description?: string
+  language?: string
+  title?: string
+  publishedDate?: string
 }
 
 export enum Category {

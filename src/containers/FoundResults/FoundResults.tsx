@@ -5,6 +5,7 @@ import styles from './FoundResults.module.scss'
 
 const FoundResults = () => {
   const resultsNumber = useAppSelector(selectTotalItems)
+
   return <div className={styles.wrapper}>Found {resultsNumber} results</div>
 }
 

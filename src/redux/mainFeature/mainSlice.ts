@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store/store'
-import { Category, mainState, Sorting } from '../types'
+import { Book, Category, mainState, Sorting } from '../types'
 import { selectAllBooks } from './selectors'
 
 const initialState: mainState = {
@@ -76,10 +76,10 @@ export default mainSlice.reducer
 export const selectCategorizedBooks = createSelector(
   selectAllBooks,
   (state: RootState) => state.main.category,
-  (books: any, category: any) => {
+  (books: Book[], category: Category) => {
     if (category === Category.ALL) return books
     const newBooks = books.filter(
-      (book: any) =>
+      (book) =>
         book.volumeInfo.categories &&
         book.volumeInfo.categories.includes(category)
     )
@@ -88,8 +88,8 @@ export const selectCategorizedBooks = createSelector(
 )
 
 export const selectBookById = createSelector(
-  [selectAllBooks, (state: RootState, id: any) => id],
-  (books: any, id: string) => {
-    return books.filter((book: any) => book.id === id)
+  [selectAllBooks, (state, id: string) => id],
+  (books, id) => {
+    return books.filter((book) => book.id === id)
   }
 )

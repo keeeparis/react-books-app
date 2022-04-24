@@ -14,6 +14,7 @@ import styles from './SortingSection.module.scss'
 
 const SortingSection = () => {
   const dispatch = useAppDispatch()
+
   const category = useAppSelector(selectCategory)
   const sort = useAppSelector(selectSorting)
 

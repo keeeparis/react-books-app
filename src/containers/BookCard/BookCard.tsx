@@ -1,26 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { volumeInfo } from '../../redux/types'
 import styles from './BookCard.module.scss'
+import { transformAuthors, transformCategory, transformImage } from './helper'
 
-const BookItem = React.memo(({ book, id }: { book: any; id: string }) => {
-  const category = book.categories ? book.categories[0] : <> &nbsp;</>
+interface BookCardProps {
+  book: volumeInfo
+  id: string
+}
 
-  const image = book.imageLinks ? (
-    <img src={book.imageLinks.thumbnail} alt="picture" loading="lazy" />
-  ) : (
-    <div>Нет изображения</div>
-  )
-
-  const authors =
-    book.authors &&
-    book.authors.map((author: string, i: number) => (
-      <div className={styles.author} key={author}>
-        {author}
-        {i + 1 !== book.authors.length ? ',' : null}
-      </div>
-    ))
-
-  // console.log(book)
+const BookCard = React.memo(({ book, id }: BookCardProps) => {
+  const category = transformCategory(book.categories)
+  const image = transformImage(book.imageLinks)
+  const authors = transformAuthors(book.authors)
 
   return (
     <Link to={`/book/${id}`}>
@@ -34,4 +26,4 @@ const BookItem = React.memo(({ book, id }: { book: any; id: string }) => {
   )
 })
 
-export default BookItem
+export default BookCard

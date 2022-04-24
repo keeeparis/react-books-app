@@ -1,0 +1,16 @@
+.Container {
+  display: grid;
+  grid-template-columns: auto 600px;
+  gap: 40px;
+}
+
+.ImageWrapper {
+  background-color: var(--color-1);
+  img {
+    // transform: scale(2);
+    // width: 200px;
+  }
+}
+
+.TextWrapper {
+}

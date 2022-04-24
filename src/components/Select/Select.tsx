@@ -1,15 +1,15 @@
-import React, { FC, useState } from 'react'
+import React, { FC, KeyboardEvent, useState } from 'react'
 import styles from './Select.module.scss'
 import cn from 'classnames'
 import useClickedOutside from '../../hooks/useClickedOutside'
 
 interface SelectType {
   data: string[]
-  onClick: (option: string) => void
   value: string
+  onClick: (option: string) => void
 }
 
-const Select: FC<SelectType> = ({ data, onClick, value }) => {
+const Select: FC<SelectType> = ({ data, value, onClick }) => {
   const [isVisible, setIsVisible] = useState(false)
 
   const closeOptions = () => {
@@ -18,28 +18,28 @@ const Select: FC<SelectType> = ({ data, onClick, value }) => {
 
   const { ref } = useClickedOutside(closeOptions)
 
-  // TODO: Разделить на две функциии и прописать типы
-  const toggleOptions = (e: any) => {
-    if (e.type === 'click') {
+  const toggleOptionsClick = () => {
+    setIsVisible((prev) => !prev)
+  }
+
+  const toggleOptionsKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
       setIsVisible((prev) => !prev)
-    } else {
-      if (e.keyCode === 13 || e.keyCode === 32) {
-        setIsVisible((prev) => !prev)
-      }
     }
   }
 
-  const handleClick = (option: string) => (e: any) => {
-    if (e.type === 'click') {
-      closeOptions()
-      onClick(option)
-    } else {
-      if (e.keyCode === 13 || e.keyCode === 32) {
+  const handleOptionClick = (option: string) => () => {
+    closeOptions()
+    onClick(option)
+  }
+
+  const handleOptionKey =
+    (option: string) => (e: KeyboardEvent<HTMLLIElement>) => {
+      if (e.key === 'Enter' || e.key === ' ') {
         closeOptions()
         onClick(option)
       }
     }
-  }
 
   return (
     <div
@@ -48,9 +48,9 @@ const Select: FC<SelectType> = ({ data, onClick, value }) => {
     >
       <div
         className={styles.selectShow}
-        onClick={toggleOptions}
+        onClick={toggleOptionsClick}
+        onKeyDown={toggleOptionsKey}
         tabIndex={0}
-        onKeyDown={toggleOptions}
       >
         {value}
       </div>
@@ -61,8 +61,8 @@ const Select: FC<SelectType> = ({ data, onClick, value }) => {
               className={cn(styles.selectLi, {
                 [styles.active]: value === option,
               })}
-              onClick={handleClick(option)}
-              onKeyDown={handleClick(option)}
+              onClick={handleOptionClick(option)}
+              onKeyDown={handleOptionKey(option)}
               key={option}
               tabIndex={0}
             >

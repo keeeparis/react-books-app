@@ -1,12 +1,10 @@
-import React, { FC, HtmlHTMLAttributes } from 'react'
+import React, { ButtonHTMLAttributes, FC } from 'react'
 import styles from './Button.module.scss'
 
-interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
-  type?: 'submit' | 'button' | 'reset'
-  disabled?: boolean
-}
-
-const Button: FC<ButtonProps> = ({ children, ...props }) => {
+const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+  children,
+  ...props
+}) => {
   return (
     <button {...props} className={styles.button}>
       {children}
