@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../components/Button'
 import Spinner from '../../components/Spinner'
 import useBooks from '../../hooks/useBooks'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
@@ -37,7 +38,7 @@ const LoadingSection = () => {
       ) : !books.length ? (
         <div>Мы не смогли найти ни одной книги по вашему запросу.</div>
       ) : areMoreResults ? (
-        <button onClick={onNextStartIndex}>Загрузить ещё</button>
+        <Button onClick={onNextStartIndex}>Загрузить ещё</Button>
       ) : null}
     </>
   )
