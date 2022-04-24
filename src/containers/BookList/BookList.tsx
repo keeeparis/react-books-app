@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../redux/hooks/hooks'
 import { selectCategorizedBooks } from '../../redux/mainFeature/mainSlice'
-import BookItem from '../BookItem/BookItem'
+import BookCard from '../BookCard'
 import styles from './BookList.module.scss'
 
 const BookList = () => {
@@ -10,9 +10,10 @@ const BookList = () => {
     <div className={styles.list}>
       {books.length
         ? books.map((book: any) => (
-            <BookItem
+            <BookCard
               key={`${book.id} + ${book.etag}`}
               book={book.volumeInfo}
+              id={book.id}
             />
           ))
         : null}
