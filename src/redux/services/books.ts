@@ -20,11 +20,13 @@ export const booksApi = createApi({
   }),
   endpoints: (builder) => ({
     getBooks: builder.query({
+      keepUnusedDataFor: 0,
       query: (data) => {
         return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30&orderBy=${data.sorting}`
       },
       async onQueryStarted(data, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState
+        console.log('first')
         // При новом запросе (startIndex = 1) -> очищай массив книг
         state.main.startIndex === 1 && dispatch(resetBooks())
 
