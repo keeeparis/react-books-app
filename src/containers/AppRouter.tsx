@@ -10,7 +10,7 @@ const Book = LazyMinLoadTime(() => import('../pages/Book'))
 
 const AppRouter = () => {
   return (
-    <Router>
+    <Router basename={import.meta.env.VITE_DOMAIN}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Suspence component={<App />} />} />
