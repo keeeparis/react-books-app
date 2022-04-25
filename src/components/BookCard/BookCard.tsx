@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import { volumeInfo } from '../../redux/types'
 import styles from './BookCard.module.scss'
 import { transformAuthors, transformCategory, transformImage } from './helper'
@@ -16,12 +17,20 @@ const BookCard = React.memo(({ book, id }: BookCardProps) => {
 
   return (
     <Link to={`/book/${id}`}>
-      <div className={styles.container}>
-        <div className={styles.imageWrapper}>{image}</div>
-        <div className={styles.category}>{category}</div>
-        <div className={styles.title}>{book.title}</div>
-        <div className={styles.authorWrapper}>{authors}</div>
-      </div>
+      <CSSTransition
+        classNames="fade"
+        addEndListener={() => {}}
+        timeout={300}
+        appear={true}
+        in={true}
+      >
+        <div className={styles.container} title={book.title}>
+          <div className={styles.imageWrapper}>{image}</div>
+          <div className={styles.category}>{category}</div>
+          <div className={styles.title}>{book.title}</div>
+          <div className={styles.authorWrapper}>{authors}</div>
+        </div>
+      </CSSTransition>
     </Link>
   )
 })
