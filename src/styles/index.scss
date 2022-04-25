@@ -8,10 +8,12 @@
 
 :root {
   --color-1: #ffe9d6;
+  --color-1-dark: #f5ddc8;
   --color-2: #a7d0cd;
   --color-2-light: #a7d0cd85;
   --color-3: #7b6079;
   --color-3-light: #7b607982;
+  --color-3-dark: #685067;
   --color-4: #de8971;
 }
 
@@ -32,6 +34,7 @@ a {
   text-decoration: none;
 }
 
+/* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -41,6 +44,18 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-3);
-  border-radius: 999px;
+  background: var(--color-3-dark);
+  // border-radius: 999px;
+}
+
+/* CSS-Transition-Group */
+.fade-appear {
+  opacity: 0.01;
+  transform: translateY(20px);
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in transform 300ms ease-in;
 }

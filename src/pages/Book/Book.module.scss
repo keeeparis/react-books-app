@@ -1,16 +1,134 @@
 .Container {
   display: grid;
-  grid-template-columns: auto 600px;
+  grid-template-columns: repeat(2, 45vw);
+  grid-template-rows: minmax(500px, auto);
   gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 200px;
+}
+
+@media (max-width: 1000px) {
+  .Container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
 }
 
 .ImageWrapper {
+  display: flex;
+  position: sticky;
+  top: 100px;
+  justify-content: center;
+  align-content: center;
   background-color: var(--color-1);
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  border-radius: 8px;
+}
+
+@media (max-width: 1000px) {
+  .ImageWrapper {
+    position: static;
+    border-radius: 0;
+  }
+}
+
+.ImageInner {
+  padding: 60px;
+
   img {
-    // transform: scale(2);
-    // width: 200px;
+    box-shadow: 8px 8px 20px 3px #00000070;
+  }
+}
+
+@media (max-width: 500px) {
+  .ImageInner {
+    padding: 40px;
+    img {
+      width: 200px;
+    }
   }
 }
 
 .TextWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.Categories {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  div {
+    padding: 8px 16px;
+    background-color: var(--color-1);
+    box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Categories {
+    margin: 0 20px 20px;
+  }
+}
+
+.Title {
+  margin-bottom: 20px;
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+
+  h2 {
+    padding: 20px 28px;
+    background-color: var(--color-1);
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Title h2 {
+    border-radius: 0;
+  }
+}
+
+.Authors {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  h4 {
+    background-color: var(--color-1);
+    font-weight: 400;
+    padding: 8px 16px;
+    box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+    font-style: italic;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .Authors {
+    margin: 0 20px 20px;
+  }
+}
+
+.Description {
+  background-color: var(--color-1);
+  padding: 24px 30px;
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  text-indent: 40px;
+  line-height: 26px;
+  border-radius: 8px;
+}
+
+@media (max-width: 1000px) {
+  .Description {
+    padding: 18px 18px;
+    text-indent: 20px;
+    font-size: 0.8em;
+    border-radius: 0;
+  }
 }

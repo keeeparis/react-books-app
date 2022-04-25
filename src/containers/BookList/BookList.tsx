@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppSelector } from '../../redux/hooks/hooks'
-import { selectCategorizedBooks } from '../../redux/mainFeature/mainSlice'
-import BookCard from '../BookCard'
+import { selectCategorizedBooks } from '../../redux/mainFeature/selectors'
+import BookCard from '../../components/BookCard'
 import styles from './BookList.module.scss'
 
 const BookList = () => {

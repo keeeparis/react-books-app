@@ -1,35 +1,43 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
+
 import { useAppSelector } from '../../redux/hooks/hooks'
-import { selectBookById } from '../../redux/mainFeature/mainSlice'
+import { selectBookById } from '../../redux/mainFeature/selectors'
 import styles from './Book.module.scss'
 
 const Book = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  if (!id) return
-
+  if (!id) return null
+  /* TODO: разделить на компоненты */
   const book = useAppSelector((state) => selectBookById(state, id))
 
   useEffect(() => {
-    if (!book[0]) navigate('/')
+    if (!book) navigate('/')
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
   }, [book])
 
   const transformImgLink = (link: string | undefined) => {
     if (!link) return
-    // console.log(link.indexOf('zoom=1'))
-    const begLink = link.slice(0, link.indexOf('zoom=1'))
-    const restLink = link.slice(link.indexOf('zoom=1') + 6, link.length)
-    const newLink = `${begLink}zoom=2${restLink}`
-    return newLink
+
+    let l = link
+    return l.replace('zoom=1', 'zoom=2').replace('http', 'https')
   }
 
-  console.log(transformImgLink(book[0]?.volumeInfo?.imageLinks?.thumbnail))
-  console.log(book[0]?.volumeInfo?.imageLinks?.thumbnail)
+  const originalLink = book?.volumeInfo?.imageLinks?.thumbnail
 
-  const image = book[0]?.volumeInfo?.imageLinks ? (
+  const image = book?.volumeInfo?.imageLinks ? (
     <img
-      srcSet={transformImgLink(book[0]?.volumeInfo?.imageLinks.thumbnail)}
+      srcSet={`
+      ${transformImgLink(book?.volumeInfo?.imageLinks.thumbnail)},
+      ${originalLink}, 
+      `}
+      // sizes="(max-width: 900px) 100vw, 300px"
       alt="book"
     />
   ) : (
@@ -37,23 +45,41 @@ const Book = () => {
   )
 
   return (
-    <div className={styles.Container}>
-      <div className={styles.ImageWrapper}>{image}</div>
-      <div className={styles.TextWrapper}>
-        <div className="title">{book[0]?.volumeInfo.title}</div>
-        <div className="categories">
-          {book[0]?.volumeInfo.categories?.map((cat) => (
-            <div key={cat}>{cat}</div>
-          ))}
+    book && (
+      <div className={styles.Container}>
+        <div className={styles.ImageWrapper}>
+          <div className={styles.ImageInner}>{image}</div>
         </div>
-        <div className="authors">
-          {book[0]?.volumeInfo.authors?.map((author) => (
-            <div key={author}>{author}</div>
-          ))}
-        </div>
-        <div className="description">{book[0]?.volumeInfo.description}</div>
+        <CSSTransition
+          classNames="fade"
+          addEndListener={() => {}}
+          timeout={500}
+          appear={true}
+          in={true}
+        >
+          <div className={styles.TextWrapper}>
+            <div className={styles.Categories}>
+              {book?.volumeInfo.categories?.map((cat) => (
+                <div key={cat}>{cat}</div>
+              ))}
+            </div>
+
+            <div className={styles.Title}>
+              <h2>{book?.volumeInfo.title}</h2>
+            </div>
+
+            <div className={styles.Authors}>
+              {book?.volumeInfo.authors?.map((author) => (
+                <h4 key={author}>{author}</h4>
+              ))}
+            </div>
+            <div className={styles.Description}>
+              {book?.volumeInfo.description}
+            </div>
+          </div>
+        </CSSTransition>
       </div>
-    </div>
+    )
   )
 }
 

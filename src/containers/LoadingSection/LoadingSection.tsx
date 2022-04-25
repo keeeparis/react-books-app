@@ -1,26 +1,35 @@
 import React from 'react'
 import Button from '../../components/Button'
 import Spinner from '../../components/Spinner'
-import useBooks from '../../hooks/useBooks'
+import { BOOKS_PER_PAGE } from '../../pages/App'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
+import { incrementStartIndex } from '../../redux/mainFeature/mainSlice'
 import {
-  incrementStartIndex,
-  selectCategorizedBooks,
-} from '../../redux/mainFeature/mainSlice'
-import { selectAreMoreResults } from '../../redux/mainFeature/selectors'
-
-export const BOOKS_PER_PAGE = 30
+  selectIsMoreResults,
+  selectInput,
+  selectStartIndex,
+  selectSkip,
+  selectSorting,
+  selectIsAnyBooks,
+} from '../../redux/mainFeature/selectors'
+import { useGetBooksQuery } from '../../redux/services/books'
 
 const LoadingSection = () => {
-  const books = useAppSelector(selectCategorizedBooks)
-  const areMoreResults = useAppSelector(selectAreMoreResults)
+  const startIndex = useAppSelector(selectStartIndex)
+  const sorting = useAppSelector(selectSorting)
+  const input = useAppSelector(selectInput)
+  const isSkip = useAppSelector(selectSkip)
+  const isAnyBooks = useAppSelector(selectIsAnyBooks)
+  const isMoreResults = useAppSelector(selectIsMoreResults)
+
+  const { isFetching, isUninitialized, isError } = useGetBooksQuery(
+    { input, startIndex, sorting },
+    { skip: isSkip }
+  )
 
   const dispatch = useAppDispatch()
 
-  const { isFetching, isUninitialized, isError } = useBooks()
-
   const onNextStartIndex = () => {
-    // количество отображаемых записей на странице
     dispatch(incrementStartIndex(BOOKS_PER_PAGE))
   }
 
@@ -35,9 +44,9 @@ const LoadingSection = () => {
           Произошла Ошибка. Попробуйте ввести запрос иначе или попробуйте
           позднее. {'>'}:
         </div>
-      ) : !books.length ? (
+      ) : !isAnyBooks ? (
         <div>Мы не смогли найти ни одной книги по вашему запросу.</div>
-      ) : areMoreResults ? (
+      ) : isMoreResults ? (
         <Button onClick={onNextStartIndex}>Загрузить ещё</Button>
       ) : null}
     </>

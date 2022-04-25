@@ -4,8 +4,10 @@
   outline: none;
   font-family: inherit;
   font-size: 18px;
-  padding: 10px 20px 10px 30px;
+  padding: 10px 20px 10px 40px;
   position: relative;
+  border-radius: 8px;
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
 
   &:focus-within,
   &:focus-visible {
@@ -21,7 +23,7 @@
     z-index: 1;
     position: absolute;
     top: 13px;
-    left: 8px;
+    left: 10px;
     width: 10px;
     height: 10px;
     border-bottom: 2px solid black;
@@ -33,9 +35,9 @@
     z-index: 1;
     position: absolute;
     top: 17px;
-    left: 12px;
-    width: 8px;
-    height: 8px;
+    left: 17px;
+    width: 6px;
+    height: 6px;
     border-top: 2px solid black;
     border-right: 2px solid black;
     // transform: rotate(90deg);

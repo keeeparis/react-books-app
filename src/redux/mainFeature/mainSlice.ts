@@ -1,7 +1,5 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../store/store'
-import { Book, Category, mainState, Sorting } from '../types'
-import { selectAllBooks } from './selectors'
+import { createSlice } from '@reduxjs/toolkit'
+import { Category, mainState, Sorting } from '../types'
 
 const initialState: mainState = {
   startIndex: 1,
@@ -32,10 +30,7 @@ export const mainSlice = createSlice({
       state.startIndex += action.payload
     },
     updateTotalItemsResponse: (state, action) => {
-      // Обновление общего количества результатов только при новом запросе.
-      if (state.startIndex === 1) {
-        state.totalItems = action.payload
-      }
+      state.totalItems = action.payload
     },
     addBooks: (state, action) => {
       if (state.startIndex === 1) {
@@ -53,43 +48,21 @@ export const mainSlice = createSlice({
     },
     updateSorting: (state, action) => {
       state.sorting = action.payload
-      // При обновлении сортировки, предыдущий порядок книг не валидный.
-      // Нужно сделать новый запрос с индексом 1 и очистить массив книг.
+      // При обновлении сортировки, предыдущий порядок книг невалидный.
+      // Нужно сделать новый запрос с индексом 1.
       state.startIndex = 1
-      state.books = []
     },
   },
 })
 
 export const {
-  incrementStartIndex,
-  updateTotalItemsResponse,
   addBooks,
   resetBooks,
+  incrementStartIndex,
+  updateTotalItemsResponse,
   updateInputAndResetIndex,
   updateCategory,
   updateSorting,
 } = mainSlice.actions
 
 export default mainSlice.reducer
-
-export const selectCategorizedBooks = createSelector(
-  selectAllBooks,
-  (state: RootState) => state.main.category,
-  (books: Book[], category: Category) => {
-    if (category === Category.ALL) return books
-    const newBooks = books.filter(
-      (book) =>
-        book.volumeInfo.categories &&
-        book.volumeInfo.categories.includes(category)
-    )
-    return newBooks
-  }
-)
-
-export const selectBookById = createSelector(
-  [selectAllBooks, (state, id: string) => id],
-  (books, id) => {
-    return books.filter((book) => book.id === id)
-  }
-)

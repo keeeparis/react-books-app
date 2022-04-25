@@ -23,7 +23,12 @@ const Form = () => {
   return (
     <div>
       <form onSubmit={onSubmit} className={styles.form}>
-        <Input type="text" onChange={onInputChange} value={input} />
+        <Input
+          type="text"
+          onChange={onInputChange}
+          value={input}
+          placeholder="Я ищу..."
+        />
         <Button type="submit" disabled={!input}>
           Поиск
         </Button>

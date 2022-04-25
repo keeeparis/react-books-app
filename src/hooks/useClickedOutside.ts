@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function useClickedOutside(callback: any) {
+  // TODO: <any>
   const ref = useRef<any>(null)
 
   const handleClickOutside = (event: any) => {

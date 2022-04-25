@@ -1,4 +1,10 @@
 .form {
   display: flex;
-  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  gap: 8px;
+}
+
+@media (max-width: 660px) {
+  .form {
+    flex-direction: column;
+  }
 }
