@@ -19,12 +19,11 @@ export const mainSlice = createSlice({
       if (state.skip) {
         state.skip = false // Чтобы активировать rtk query
       }
-      // Если введенный инпут отличается от предыдущего,
-      // то обновляем индекс и state.input -> срабатывает rtk query
-      if (state.input !== action.payload) {
-        state.startIndex = 1
-        state.input = action.payload
-      } // иначе ничего не делаем -> не срабатывает rtk query
+      state.startIndex = 1
+      state.input = action.payload
+    },
+    enableSkip: (state) => {
+      state.skip = true
     },
     incrementStartIndex: (state, action) => {
       state.startIndex += action.payload
@@ -51,6 +50,8 @@ export const mainSlice = createSlice({
       // При обновлении сортировки, предыдущий порядок книг невалидный.
       // Нужно сделать новый запрос с индексом 1.
       state.startIndex = 1
+      // и активировать query переключением skip на false
+      state.skip = false
     },
   },
 })
@@ -58,6 +59,7 @@ export const mainSlice = createSlice({
 export const {
   addBooks,
   resetBooks,
+  enableSkip,
   incrementStartIndex,
   updateTotalItemsResponse,
   updateInputAndResetIndex,

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../components/Button'
 import Spinner from '../../components/Spinner'
 import { BOOKS_PER_PAGE } from '../../pages/App'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
-import { incrementStartIndex } from '../../redux/mainFeature/mainSlice'
+import {
+  enableSkip,
+  incrementStartIndex,
+} from '../../redux/mainFeature/mainSlice'
 import {
   selectIsMoreResults,
   selectInput,
@@ -24,7 +27,7 @@ const LoadingSection = () => {
 
   const { isFetching, isUninitialized, isError } = useGetBooksQuery(
     { input, startIndex, sorting },
-    { skip: isSkip }
+    { skip: isSkip, refetchOnMountOrArgChange: true }
   )
 
   const dispatch = useAppDispatch()
@@ -33,8 +36,18 @@ const LoadingSection = () => {
     dispatch(incrementStartIndex(BOOKS_PER_PAGE))
   }
 
+  useEffect(() => {
+    return () => {
+      // На размонтирование компонента -> переключаем скип на true
+      // для того, чтобы при монтировании useGetBooksQuery не делал запрос.
+      !isSkip && dispatch(enableSkip())
+    }
+  }, [isSkip])
+
   return (
     <>
+      {' '}
+      {/* // TODO: Поместить каждый вариант в компонент. */}
       {isUninitialized ? (
         <div>Поиск книг!</div>
       ) : isFetching ? (
