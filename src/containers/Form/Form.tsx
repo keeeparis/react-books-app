@@ -8,12 +8,17 @@ import styles from './Form.module.scss'
 
 const Form = () => {
   // to save input value after switching pages
-  const [input, setInput] = useState(useAppSelector(selectInput))
+  const stateInput = useAppSelector(selectInput)
+  const [input, setInput] = useState(stateInput)
   const dispatch = useAppDispatch()
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(updateInputAndResetIndex(input))
+    if (input !== stateInput) {
+      // dispatch только если мы изменили инпут формы
+      // и он отличается от инпута global state
+      dispatch(updateInputAndResetIndex(input))
+    }
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
