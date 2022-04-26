@@ -48,19 +48,19 @@ const LoadingSection = () => {
     <>
       {' '}
       {/* // TODO: Поместить каждый вариант в компонент. */}
-      {isUninitialized ? (
-        <div>Поиск книг!</div>
-      ) : isFetching ? (
+      {isFetching ? (
         <Spinner />
       ) : isError ? (
         <div>
           Произошла Ошибка. Попробуйте ввести запрос иначе или попробуйте
           позднее. {'>'}:
         </div>
-      ) : !isAnyBooks ? (
+      ) : !isAnyBooks && !isUninitialized ? (
         <div>Мы не смогли найти ни одной книги по вашему запросу.</div>
       ) : isMoreResults ? (
         <Button onClick={onNextStartIndex}>Загрузить ещё</Button>
+      ) : isUninitialized ? (
+        <div>Поиск книг!</div>
       ) : null}
     </>
   )
