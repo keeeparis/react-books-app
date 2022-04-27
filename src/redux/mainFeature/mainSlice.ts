@@ -16,9 +16,7 @@ export const mainSlice = createSlice({
   initialState,
   reducers: {
     updateInputAndResetIndex: (state, action) => {
-      if (state.skip) {
-        state.skip = false // Чтобы активировать rtk query
-      }
+      state.skip = false // Чтобы активировать rtk query
       state.startIndex = 1
       state.input = action.payload
     },
@@ -26,17 +24,20 @@ export const mainSlice = createSlice({
       state.skip = true
     },
     incrementStartIndex: (state, action) => {
+      state.skip = false // Чтобы активировать rtk query
       state.startIndex += action.payload
     },
     updateTotalItemsResponse: (state, action) => {
       state.totalItems = action.payload
     },
     addBooks: (state, action) => {
+      // Если это первый запрос по заданному поиску,
       if (state.startIndex === 1) {
-        // Если это первый запрос по заданному поиску,
-        state.books = action.payload // то полученные данные будут новым массивом books.
+        // то полученные данные будут новым массивом books.
+        state.books = action.payload
       } else {
-        state.books = [...state.books, ...action.payload] // Иначе, добавь к имеющимся полученные данные в массив books.
+        // Иначе, добавь к имеющимся полученные данные в массив books.
+        state.books = [...state.books, ...action.payload]
       }
     },
     resetBooks: (state) => {
@@ -50,8 +51,10 @@ export const mainSlice = createSlice({
       // При обновлении сортировки, предыдущий порядок книг невалидный.
       // Нужно сделать новый запрос с индексом 1.
       state.startIndex = 1
-      // и активировать query переключением skip на false
-      state.skip = false
+      // и если пользователь ввел текст запроса в инпут
+      if (state.input) {
+        state.skip = false // активировать rtk query
+      }
     },
   },
 })

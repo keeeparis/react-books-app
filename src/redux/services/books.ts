@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { BOOKS_PER_PAGE } from '../../pages/App'
+
 import {
   addBooks,
   resetBooks,
@@ -13,6 +15,23 @@ interface Response {
   items: Book[]
 }
 
+/* RTK Query делает запрос к Google API, используя 3 параметра: 
+  -input, 
+  -startIndex, 
+  -sorting. 
+  
+  При изменении одной из переменных выше, происходит новый запрос.
+  Для отправки запроса по кнопке, изначально переменная skip равна true,
+  запрещая отправлять запрос при монтировании компонента LoadingSection. 
+  Также, при размонтировании компонента skip = true.
+
+  При submit формы skip переводится на false и происходит запрос. 
+  Изменения в параметрах выше - триггерит новый запрос.
+
+  Неудобство подхода в том, что нужно делать skip=false, когда
+  диспатчится экш изменения одного из параметров
+*/
+
 export const booksApi = createApi({
   reducerPath: 'booksApi',
   baseQuery: fetchBaseQuery({
@@ -22,7 +41,7 @@ export const booksApi = createApi({
     getBooks: builder.query({
       // keepUnusedDataFor: 10,
       query: (data) => {
-        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=30&orderBy=${data.sorting}`
+        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=${BOOKS_PER_PAGE}&orderBy=${data.sorting}`
       },
       async onQueryStarted(data, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState

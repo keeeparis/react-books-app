@@ -1,5 +1,8 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useCallback } from 'react'
+
 import Select from '../../components/Select'
+import styles from './SortingSection.module.scss'
+
 import { categories, sorting } from '../../mock'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
 import {
@@ -10,7 +13,6 @@ import {
   selectCategory,
   selectSorting,
 } from '../../redux/mainFeature/selectors'
-import styles from './SortingSection.module.scss'
 
 const SortingSection = () => {
   const dispatch = useAppDispatch()
@@ -18,13 +20,13 @@ const SortingSection = () => {
   const category = useAppSelector(selectCategory)
   const sort = useAppSelector(selectSorting)
 
-  const onCategoryChange = (option: string) => {
+  const onCategoryChange = useCallback((option: string) => {
     dispatch(updateCategory(option))
-  }
+  }, [])
 
-  const onSortingChange = (option: string) => {
+  const onSortingChange = useCallback((option: string) => {
     dispatch(updateSorting(option))
-  }
+  }, [])
 
   return (
     <div className={styles.wrapper}>

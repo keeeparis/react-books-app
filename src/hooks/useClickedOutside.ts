@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-export default function useClickedOutside(callback: any) {
-  // TODO: <any>
+export default function useClickedOutside(callback: () => void) {
   const ref = useRef<any>(null)
 
-  const handleClickOutside = (event: any) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (!(ref.current == event.target || ref.current.contains(event.target))) {
       callback()
     }
