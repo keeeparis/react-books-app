@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test BookCard Component 1`] = `
+<a
+  href="/book/1"
+  onClick={[Function]}
+>
+  <div
+    className="container"
+    title="Crime and Punishment"
+  >
+    <div
+      className="imageWrapper"
+    >
+      <img
+        alt="picture"
+        loading="lazy"
+        src="https://some-url.com"
+      />
+    </div>
+    <div
+      className="category"
+    >
+      Art
+    </div>
+    <div
+      className="title"
+    >
+      Crime and Punishment
+    </div>
+    <div
+      className="authorWrapper"
+    >
+      <h4
+        className="author"
+      >
+        Conan Doyle
+        ,
+      </h4>
+      <h4
+        className="author"
+      >
+        Richard Dawkins
+      </h4>
+    </div>
+  </div>
+</a>
+`;
