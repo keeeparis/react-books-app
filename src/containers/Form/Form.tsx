@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
+
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
-import { updateInputAndResetIndex } from '../../redux/mainFeature/mainSlice'
-import { selectInput } from '../../redux/mainFeature/selectors'
 import styles from './Form.module.scss'
+
+import { updateInputAndResetIndex } from '../../redux/mainFeature/mainSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
+import { selectInput } from '../../redux/mainFeature/selectors'
 
 const Form = () => {
   // to save input value after switching pages

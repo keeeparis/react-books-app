@@ -12,12 +12,9 @@ export const BOOKS_PER_PAGE = 30
 const App = () => {
   return (
     <>
-      {/* <div className={styles.Wrapper}> */}
       <Form />
 
       <SortingSection />
-      {/* <div className={styles.Background} /> */}
-      {/* </div> */}
 
       <FoundResults />
 

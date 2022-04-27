@@ -1,5 +1,5 @@
-import { volumeInfo } from '../../redux/types'
 import styles from './BookCard.module.scss'
+import { volumeInfo } from '../../redux/types'
 
 export const transformCategory = (categories: volumeInfo['categories']) => {
   const categoryDiv = categories ? categories[0] : <>&nbsp;</>
@@ -18,10 +18,10 @@ export const transformImage = (images: volumeInfo['imageLinks']) => {
 export const transformAuthors = (authors: volumeInfo['authors']) => {
   if (!authors) return
   const authorsDiv = authors.map((author, i) => (
-    <div className={styles.author} key={author}>
+    <h4 className={styles.author} key={author}>
       {author}
       {i + 1 !== authors.length ? ',' : null}
-    </div>
+    </h4>
   ))
   return authorsDiv
 }

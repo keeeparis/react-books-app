@@ -1,6 +1,7 @@
 import React, { FC, KeyboardEvent, useState } from 'react'
-import styles from './Select.module.scss'
 import cn from 'classnames'
+
+import styles from './Select.module.scss'
 import useClickedOutside from '../../hooks/useClickedOutside'
 
 interface SelectType {

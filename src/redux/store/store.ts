@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
+
 import mainReducer from '../mainFeature/mainSlice'
+
 import { booksApi } from '../services/books'
 
 export const store = configureStore({

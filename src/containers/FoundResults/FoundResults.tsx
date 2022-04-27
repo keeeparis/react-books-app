@@ -1,7 +1,9 @@
 import React from 'react'
+
+import styles from './FoundResults.module.scss'
+
 import { useAppSelector } from '../../redux/hooks/hooks'
 import { selectTotalItems } from '../../redux/mainFeature/selectors'
-import styles from './FoundResults.module.scss'
 
 const FoundResults = () => {
   const resultsNumber = useAppSelector(selectTotalItems)
