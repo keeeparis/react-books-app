@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
 
 import styles from './Book.module.scss'
 
@@ -8,6 +7,7 @@ import { useAppSelector } from '../../redux/hooks/hooks'
 import { selectBookById } from '../../redux/mainFeature/selectors'
 import { transformCategory, transformAuthors } from './helper'
 import { transformImage } from '../../components/BookCard/helper'
+import Fade from '../../containers/Fade'
 
 const Book = () => {
   const { id } = useParams()
@@ -31,13 +31,7 @@ const Book = () => {
 
   return (
     <>
-      <CSSTransition
-        classNames="fade"
-        addEndListener={() => {}}
-        timeout={500}
-        appear={true}
-        in={true}
-      >
+      <Fade>
         <div className={styles.Container}>
           <div className={styles.ImageWrapper}>
             <div className={styles.ImageInner}>{image}</div>
@@ -56,7 +50,7 @@ const Book = () => {
             </div>
           </div>
         </div>
-      </CSSTransition>
+      </Fade>
     </>
   )
 }
