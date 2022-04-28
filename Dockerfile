@@ -4,6 +4,8 @@ WORKDIR /app
 
 ADD . .
 
+ENV NODE_ENV=development
+
 RUN npm install
 
 EXPOSE 3000

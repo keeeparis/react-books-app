@@ -3,9 +3,6 @@ version: '3.8'
 services:
   dev:
     build:
-      context: ./
-      dockerfile: Dockerfile
-    volumes:
-      - ./:/app
+      context: .
     ports:
       - '3000:3000'
