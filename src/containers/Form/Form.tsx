@@ -29,14 +29,15 @@ const Form = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form} role="form">
         <Input
           type="text"
           onChange={onInputChange}
           value={input}
           placeholder="Я ищу..."
+          role="input"
         />
-        <Button type="submit" disabled={!input}>
+        <Button type="submit" disabled={!input} role="button">
           Поиск
         </Button>
       </form>

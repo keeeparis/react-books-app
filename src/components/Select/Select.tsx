@@ -52,6 +52,7 @@ const Select: FC<SelectType> = ({ data, value, onClick }) => {
         onClick={toggleOptionsClick}
         onKeyDown={toggleOptionsKey}
         tabIndex={0}
+        role="selected"
       >
         {value}
       </div>
@@ -66,6 +67,7 @@ const Select: FC<SelectType> = ({ data, value, onClick }) => {
               onKeyDown={handleOptionKey(option)}
               key={option}
               tabIndex={0}
+              role="listitem"
             >
               {option.toUpperCase()}
             </li>

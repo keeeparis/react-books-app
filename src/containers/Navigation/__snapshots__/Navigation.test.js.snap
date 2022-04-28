@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Navigation Component 1`] = `
+<div
+  className="Container"
+>
+  <div
+    className="Wrapper"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      Home
+    </a>
+    <div
+      className="Up"
+      onClick={[Function]}
+    >
+      Up
+    </div>
+  </div>
+</div>
+`;
