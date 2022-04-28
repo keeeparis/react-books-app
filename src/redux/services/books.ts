@@ -1,41 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BOOKS_PER_PAGE } from '../../pages/App'
 
-import {
-  addBooks,
-  resetBooks,
-  updateTotalItemsResponse,
-} from '../mainFeature/mainSlice'
+import { resetBooks, updateTotalItemsResponse } from '../mainFeature/mainSlice'
+import { BOOKS_PER_PAGE } from '../../pages/App'
 import { RootState } from '../store/store'
-import { Book, Category } from '../types'
+import { Book, Category, Sorting } from '../types'
+
+interface RequestData {
+  input: string
+  category: Category
+  startIndex: number
+  sorting: Sorting
+}
 
 interface Response {
   kind: string
   totalItems: number
   items: Book[]
 }
-
-/* RTK Query делает запрос к Google API, используя 3 параметра: 
-  -input, 
-  -startIndex, 
-  -sorting. 
-  
-  При изменении одной из переменных выше, происходит новый запрос.
-  Для отправки запроса по кнопке, изначально переменная skip равна true,
-  запрещая отправлять запрос при монтировании компонента LoadingSection. 
-  Также, при размонтировании компонента skip = true.
-
-  При submit формы skip переводится на false и происходит запрос. 
-  Изменения в параметрах выше - триггерит новый запрос.
-
-  Неудобство подхода в том, что нужно делать skip=false, когда
-  диспатчится экш изменения одного из параметров
-*/
-
-/* TODO: 
-  сортировку сделать в запросе subject=<data>,
-  а не как сейчас реализовано
-*/
 
 export const booksApi = createApi({
   reducerPath: 'booksApi',
@@ -44,8 +25,7 @@ export const booksApi = createApi({
   }),
   endpoints: (builder) => ({
     getBooks: builder.query({
-      // keepUnusedDataFor: 10,
-      query: (data) => {
+      query: (data: RequestData) => {
         const startRequest = `volumes?q=${data.input}`
         const subject =
           data.category !== Category.ALL ? `+subject:${data.category}` : ''
@@ -61,12 +41,10 @@ export const booksApi = createApi({
 
         try {
           const { data }: { data: Response } = await queryFulfilled
-          // Если в response есть поле items -> вызови dispatch
-          data.items && dispatch(addBooks(data.items))
 
           // Обнови общее количество книг только! при новом запросе.
           // Это нужно потому, что ответ с количеством items незначительно
-          // отличается при каждом запросе .
+          // отличается при каждом (дополнительном) запросе.
           state.main.startIndex === 1 &&
             dispatch(updateTotalItemsResponse(data.totalItems))
         } catch (e) {

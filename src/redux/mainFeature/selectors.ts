@@ -2,7 +2,6 @@ import { createSelector } from '@reduxjs/toolkit'
 
 import { BOOKS_PER_PAGE } from '../../pages/App'
 import { RootState } from '../store/store'
-import { Book, Category } from '../types'
 
 /* Select */
 export const selectStartIndex = (state: RootState) => state.main.startIndex
@@ -17,20 +16,6 @@ export const selectIsMoreResults = (state: RootState) =>
   state.main.totalItems > state.main.startIndex + BOOKS_PER_PAGE
 
 /* Create Selectors */
-export const selectCategorizedBooks = createSelector(
-  selectAllBooks,
-  (state: RootState) => state.main.category,
-  (books: Book[], category: Category) => {
-    if (category === Category.ALL) return books
-    const newBooks = books.filter(
-      (book) =>
-        book.volumeInfo.categories &&
-        book.volumeInfo.categories.includes(category)
-    )
-    return newBooks
-  }
-)
-
 export const selectIsAnyBooks = createSelector(
   selectAllBooks,
   (books) => !!books.length

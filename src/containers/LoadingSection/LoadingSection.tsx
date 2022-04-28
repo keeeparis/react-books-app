@@ -10,6 +10,7 @@ import { BOOKS_PER_PAGE } from '../../pages/App'
 import { useGetBooksQuery } from '../../redux/services/books'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
 import {
+  addBooks,
   enableSkip,
   incrementStartIndex,
 } from '../../redux/mainFeature/mainSlice'
@@ -32,9 +33,9 @@ const LoadingSection = () => {
   const isAnyBooks = useAppSelector(selectIsAnyBooks)
   const isMoreResults = useAppSelector(selectIsMoreResults)
 
-  const { isFetching, isUninitialized, isError } = useGetBooksQuery(
+  const { data, isFetching, isUninitialized, isError } = useGetBooksQuery(
     { input, startIndex, sorting, category },
-    { skip: isSkip, refetchOnMountOrArgChange: true }
+    { skip: isSkip }
   )
 
   const dispatch = useAppDispatch()
@@ -50,6 +51,15 @@ const LoadingSection = () => {
       !isSkip && dispatch(enableSkip())
     }
   }, [isSkip])
+
+  useEffect(() => {
+    const isData = data && data.items && data.items.length
+    if (isData) {
+      // Обновляем книги в store при изменении ответа (data) от useQuery,
+      // который возращает кэшируемые, if any, либо новые данные.
+      dispatch(addBooks(data.items))
+    }
+  }, [data])
 
   return (
     <>
