@@ -45,6 +45,10 @@ export const mainSlice = createSlice({
     },
     updateCategory: (state, action) => {
       state.category = action.payload
+      state.startIndex = 1
+      if (state.input) {
+        state.skip = false
+      }
     },
     updateSorting: (state, action) => {
       state.sorting = action.payload

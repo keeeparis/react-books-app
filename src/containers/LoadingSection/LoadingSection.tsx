@@ -20,18 +20,20 @@ import {
   selectIsAnyBooks,
   selectStartIndex,
   selectIsMoreResults,
+  selectCategory,
 } from '../../redux/mainFeature/selectors'
 
 const LoadingSection = () => {
   const input = useAppSelector(selectInput)
   const isSkip = useAppSelector(selectSkip)
   const sorting = useAppSelector(selectSorting)
+  const category = useAppSelector(selectCategory)
   const startIndex = useAppSelector(selectStartIndex)
   const isAnyBooks = useAppSelector(selectIsAnyBooks)
   const isMoreResults = useAppSelector(selectIsMoreResults)
 
   const { isFetching, isUninitialized, isError } = useGetBooksQuery(
-    { input, startIndex, sorting },
+    { input, startIndex, sorting, category },
     { skip: isSkip, refetchOnMountOrArgChange: true }
   )
 

@@ -1,12 +1,12 @@
 export const categories = [
-  'All',
-  'Art',
-  'Biography',
-  'Computers',
-  'History',
-  'Medical',
-  'Poetry',
-  'Fiction',
+  'all',
+  'art',
+  'biography',
+  'computers',
+  'history',
+  'medical',
+  'poetry',
+  'fiction',
 ]
 
 export const sorting = ['relevance', 'newest']

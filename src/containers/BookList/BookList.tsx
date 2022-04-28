@@ -4,10 +4,13 @@ import BookCard from '../../components/BookCard'
 import styles from './BookList.module.scss'
 
 import { useAppSelector } from '../../redux/hooks/hooks'
-import { selectCategorizedBooks } from '../../redux/mainFeature/selectors'
+import {
+  selectAllBooks,
+  selectCategorizedBooks,
+} from '../../redux/mainFeature/selectors'
 
 const BookList = () => {
-  const books = useAppSelector(selectCategorizedBooks)
+  const books = useAppSelector(selectAllBooks)
 
   return (
     <div className={styles.list}>

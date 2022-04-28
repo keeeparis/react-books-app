@@ -32,7 +32,7 @@ export const selectCategorizedBooks = createSelector(
 )
 
 export const selectIsAnyBooks = createSelector(
-  selectCategorizedBooks,
+  selectAllBooks,
   (books) => !!books.length
 )
 

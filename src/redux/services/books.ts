@@ -7,7 +7,7 @@ import {
   updateTotalItemsResponse,
 } from '../mainFeature/mainSlice'
 import { RootState } from '../store/store'
-import { Book } from '../types'
+import { Book, Category } from '../types'
 
 interface Response {
   kind: string
@@ -32,6 +32,11 @@ interface Response {
   диспатчится экш изменения одного из параметров
 */
 
+/* TODO: 
+  сортировку сделать в запросе subject=<data>,
+  а не как сейчас реализовано
+*/
+
 export const booksApi = createApi({
   reducerPath: 'booksApi',
   baseQuery: fetchBaseQuery({
@@ -41,7 +46,13 @@ export const booksApi = createApi({
     getBooks: builder.query({
       // keepUnusedDataFor: 10,
       query: (data) => {
-        return `volumes?q=${data.input}&startIndex=${data.startIndex}&maxResults=${BOOKS_PER_PAGE}&orderBy=${data.sorting}`
+        const startRequest = `volumes?q=${data.input}`
+        const subject =
+          data.category !== Category.ALL ? `+subject:${data.category}` : ''
+        const startIndex = `&startIndex=${data.startIndex}`
+        const maxResults = `&maxResults=${BOOKS_PER_PAGE}`
+        const orderBy = `&orderBy=${data.sorting}`
+        return `${startRequest}${subject}${startIndex}${maxResults}${orderBy}`
       },
       async onQueryStarted(data, { dispatch, getState, queryFulfilled }) {
         const state = getState() as RootState

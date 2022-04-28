@@ -29,14 +29,14 @@ export interface volumeInfo {
 }
 
 export enum Category {
-  ALL = 'All',
-  ART = 'Art',
-  BIOGRAPHY = 'Biography',
-  COMPUTERS = 'Computers',
-  HISTORY = 'History',
-  MEDICAL = 'Medical',
-  POETRY = 'Poetry',
-  FICTION = 'Fiction',
+  ALL = 'all',
+  ART = 'art',
+  BIOGRAPHY = 'biography',
+  COMPUTERS = 'computers',
+  HISTORY = 'history',
+  MEDICAL = 'medical',
+  POETRY = 'poetry',
+  FICTION = 'fiction',
 }
 
 export enum Sorting {
