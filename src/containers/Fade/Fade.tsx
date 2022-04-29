@@ -10,7 +10,7 @@ const Fade: FC<FadeProps> = ({ children }) => {
     <CSSTransition
       classNames="fade"
       addEndListener={() => {}}
-      timeout={300}
+      timeout={1500}
       appear={true}
       in={true}
     >
