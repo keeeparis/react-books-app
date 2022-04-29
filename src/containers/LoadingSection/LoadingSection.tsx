@@ -13,6 +13,7 @@ import {
   addBooks,
   enableSkip,
   incrementStartIndex,
+  updateTotalItemsResponse,
 } from '../../redux/mainFeature/mainSlice'
 import {
   selectSkip,
@@ -46,18 +47,23 @@ const LoadingSection = () => {
 
   useEffect(() => {
     return () => {
-      // На размонтирование компонента -> переключаем скип на true
-      // для того, чтобы при монтировании useGetBooksQuery не делал запрос.
+      /* На размонтирование компонента -> переключаем скип на true
+      для того, чтобы при монтировании useGetBooksQuery не делал запрос. */
       !isSkip && dispatch(enableSkip())
     }
   }, [isSkip])
 
   useEffect(() => {
-    const isData = data && data.items && data.items.length
-    if (isData) {
-      // Обновляем книги в store при изменении ответа (data) от useQuery,
-      // который возращает кэшируемые, if any, либо новые данные.
-      dispatch(addBooks(data.items))
+    if (data) {
+      /* Обновляем книги в store при изменении ответа (data) от useQuery,
+      который возращает кэшируемые, if any, либо новые данные или
+      данных нет. */
+      dispatch(addBooks(data?.items))
+
+      /* Обнови общее количество книг только! при новом запросе.
+      Это нужно потому, что ответ с количеством items незначительно
+      отличается при каждом (дополнительном) запросе. */
+      startIndex === 0 && dispatch(updateTotalItemsResponse(data.totalItems))
     }
   }, [data])
 

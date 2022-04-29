@@ -16,9 +16,8 @@ export const selectIsMoreResults = (state: RootState) =>
   state.main.totalItems > state.main.startIndex + BOOKS_PER_PAGE
 
 /* Create Selectors */
-export const selectIsAnyBooks = createSelector(
-  selectAllBooks,
-  (books) => !!books.length
+export const selectIsAnyBooks = createSelector(selectAllBooks, (books) =>
+  books ? !!books.length : 0
 )
 
 export const selectBookById = createSelector(

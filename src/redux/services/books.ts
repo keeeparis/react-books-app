@@ -34,22 +34,11 @@ export const booksApi = createApi({
         const orderBy = `&orderBy=${data.sorting}`
         return `${startRequest}${subject}${startIndex}${maxResults}${orderBy}`
       },
-      async onQueryStarted(data, { dispatch, getState, queryFulfilled }) {
+      async onQueryStarted(data, { dispatch, getState }) {
         const state = getState() as RootState
-        // При новом запросе (startIndex = 1) -> очищай массив книг
-        state.main.startIndex === 1 && dispatch(resetBooks())
-
-        try {
-          const { data }: { data: Response } = await queryFulfilled
-
-          // Обнови общее количество книг только! при новом запросе.
-          // Это нужно потому, что ответ с количеством items незначительно
-          // отличается при каждом (дополнительном) запросе.
-          state.main.startIndex === 1 &&
-            dispatch(updateTotalItemsResponse(data.totalItems))
-        } catch (e) {
-          console.log(e)
-        }
+        /* При новом запросе (startIndex = 0) -> очищай массив книг,
+        чтобы показать крутящийся спиннер */
+        state.main.startIndex === 0 && dispatch(resetBooks())
       },
     }),
   }),
