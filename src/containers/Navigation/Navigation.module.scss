@@ -34,9 +34,8 @@
   }
 }
 
-.Up {
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
+.RightSide {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
 }

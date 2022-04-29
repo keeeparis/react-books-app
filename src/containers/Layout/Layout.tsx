@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Footer from '../Footer'
 
 import Navigation from '../Navigation'
 import styles from './Layout.module.scss'
@@ -11,6 +12,7 @@ const Layout = () => {
       <div className={styles.Wrapper}>
         <Outlet />
       </div>
+      <Footer />
     </div>
   )
 }

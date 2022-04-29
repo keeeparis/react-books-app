@@ -3,6 +3,7 @@ import cn from 'classnames'
 
 import styles from './Select.module.scss'
 import useClickedOutside from '../../hooks/useClickedOutside'
+import { useTranslation } from 'react-i18next'
 
 interface SelectType {
   data: string[]
@@ -12,6 +13,7 @@ interface SelectType {
 
 const Select: FC<SelectType> = ({ data, value, onClick }) => {
   const [isVisible, setIsVisible] = useState(false)
+  const { t } = useTranslation()
 
   const closeOptions = () => {
     setIsVisible(false)
@@ -54,7 +56,7 @@ const Select: FC<SelectType> = ({ data, value, onClick }) => {
         tabIndex={0}
         role="selected"
       >
-        {value}
+        {t(value)}
       </div>
       {isVisible && (
         <ul className={styles.selectUl}>
@@ -69,7 +71,7 @@ const Select: FC<SelectType> = ({ data, value, onClick }) => {
               tabIndex={0}
               role="listitem"
             >
-              {option.toUpperCase()}
+              {t(option).toUpperCase()}
             </li>
           ))}
         </ul>

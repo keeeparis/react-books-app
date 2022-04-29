@@ -7,7 +7,7 @@ import Fade from '../../containers/Fade'
 
 import { useAppSelector } from '../../redux/hooks/hooks'
 import { selectBookById } from '../../redux/mainFeature/selectors'
-import { transformCategory, transformAuthors, transformTags } from './helper'
+import { transformCategory, transformAuthors, useTransformTags } from './helper'
 import { transformImage } from '../../components/BookCard/helper'
 
 const Book = () => {
@@ -32,7 +32,7 @@ const Book = () => {
   const image = transformImage(book.volumeInfo.imageLinks)
   const categories = transformCategory(book.volumeInfo.categories)
   const authors = transformAuthors(book.volumeInfo.authors)
-  const tags = transformTags(
+  const tags = useTransformTags(
     book.volumeInfo.pageCount,
     book.volumeInfo.averageRating
   )

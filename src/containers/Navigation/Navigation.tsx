@@ -1,33 +1,28 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Translation from '../../components/Translation'
 
 import styles from './Navigation.module.scss'
 
 const Navigation = () => {
   const location = useLocation()
   const navigate = useNavigate()
-
-  const onClick = () => {
-    window.scrollTo({
-      left: 0,
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
+  const { t } = useTranslation()
 
   const isIndexPage = location.pathname === '/'
   const link = isIndexPage ? (
-    <Link to={'/'}>Home</Link>
+    <Link to={'/'}>{t('home')}</Link>
   ) : (
-    <a onClick={() => navigate(-1)}>Back</a>
+    <a onClick={() => navigate(-1)}>{t('back')}</a>
   )
 
   return (
     <div className={styles.Container}>
       <div className={styles.Wrapper}>
         {link}
-        <div onClick={onClick} className={styles.Up}>
-          Up
+        <div className={styles.RightSide}>
+          <Translation />
         </div>
       </div>
     </div>

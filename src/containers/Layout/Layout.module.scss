@@ -1,4 +1,7 @@
 .Container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .Wrapper {
@@ -7,4 +10,5 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  flex: 1;
 }

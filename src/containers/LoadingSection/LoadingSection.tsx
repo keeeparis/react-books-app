@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Spinner from '../../components/Spinner'
@@ -39,6 +40,7 @@ const LoadingSection = () => {
     { skip: isSkip }
   )
 
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const onNextStartIndex = () => {
@@ -73,10 +75,10 @@ const LoadingSection = () => {
         <Spinner />
       ) : isError ? (
         <Error />
+      ) : isMoreResults ? (
+        <Button onClick={onNextStartIndex}>{t('load-more')}</Button>
       ) : !isAnyBooks && !isUninitialized ? (
         <NotFound />
-      ) : isMoreResults ? (
-        <Button onClick={onNextStartIndex}>Загрузить ещё</Button>
       ) : isUninitialized ? (
         <StartMessage />
       ) : null}

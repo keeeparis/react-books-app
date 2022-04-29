@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -13,6 +14,7 @@ const Form = () => {
   const stateInput = useAppSelector(selectInput)
   const [input, setInput] = useState(stateInput)
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,11 +39,11 @@ const Form = () => {
           onChange={onInputChange}
           resetInput={resetInput}
           value={input}
-          placeholder="Я ищу..."
+          placeholder={t('search-placeholder')}
           role="input"
         />
         <Button type="submit" disabled={isButtonDisabled} role="button">
-          Поиск
+          {t('search')}
         </Button>
       </form>
     </div>

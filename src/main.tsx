@@ -6,6 +6,7 @@ import AppRouter from './containers/AppRouter'
 
 import { store } from './redux/store/store'
 
+import './i18n/config'
 import './styles/index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

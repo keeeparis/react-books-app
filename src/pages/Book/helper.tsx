@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Emoji from '../../components/Emoji'
 import { volumeInfo } from '../../redux/types'
 
@@ -13,14 +14,16 @@ export const transformAuthors = (authors: volumeInfo['authors']) => {
   return authorsDiv
 }
 
-export const transformTags = (
+export const useTransformTags = (
   pageCount: volumeInfo['pageCount'],
   rating: volumeInfo['averageRating']
 ) => {
+  const { t } = useTranslation()
+
   const pageCountOut = pageCount ? (
     <h4 key={1}>
       {<Emoji label="pages" symbol={'📄'} />}
-      {pageCount} pages
+      {t('pageCountWithCount', { count: pageCount })}
     </h4>
   ) : null
   const ratingOut = rating ? (
