@@ -1,3 +1,7 @@
+@mixin boxShadow {
+  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+}
+
 .Container {
   display: grid;
   grid-template-columns: repeat(2, 45vw);
@@ -21,7 +25,7 @@
   justify-content: center;
   align-content: center;
   background-color: var(--color-1);
-  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  @include boxShadow;
   border-radius: 8px;
 }
 
@@ -51,43 +55,42 @@
 }
 
 @media (max-width: 300px) {
-  .ImageInner {
-    img {
-      width: 100px;
-    }
+  .ImageInner img {
+    width: 100px;
   }
 }
 
 .TextWrapper {
   display: flex;
   flex-direction: column;
+
+  > :not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
-.Categories {
-  margin-bottom: 20px;
+.TagsWrapper {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
 
-  div {
-    padding: 8px 16px;
+  h4 {
     background-color: var(--color-1);
-    box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
-    position: relative;
-    overflow: hidden;
+    padding: 8px 16px;
+    font-weight: 400;
     border-radius: 8px;
+    @include boxShadow;
   }
 }
 
 @media (max-width: 1000px) {
-  .Categories {
+  .TagsWrapper {
     margin: 0 20px 20px;
   }
 }
 
 .Title {
-  margin-bottom: 20px;
-  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  @include boxShadow;
 
   h2 {
     padding: 20px 28px;
@@ -102,32 +105,14 @@
   }
 }
 
-.Authors {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-
-  h4 {
-    background-color: var(--color-1);
-    font-weight: 400;
-    font-style: italic;
-    padding: 8px 16px;
-    box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
-    border-radius: 8px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .Authors {
-    margin: 0 20px 20px;
-  }
+.Authors h4 {
+  font-style: italic;
 }
 
 .Description {
   background-color: var(--color-1);
   padding: 24px 30px;
-  box-shadow: 1px 6px 20px 1px rgb(0 0 0 / 14%);
+  @include boxShadow;
   text-indent: 40px;
   line-height: 26px;
   border-radius: 8px;
@@ -141,4 +126,10 @@
     font-size: 0.9em;
     border-radius: 0;
   }
+}
+
+.AdditionalTags h4 {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
 }

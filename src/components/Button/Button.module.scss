@@ -18,6 +18,10 @@
     background: var(--color-3);
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &:focus-visible {
     outline-width: 3px;
   }
