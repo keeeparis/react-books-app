@@ -1,9 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import styles from './Navigation.module.scss'
 
 const Navigation = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const onClick = () => {
     window.scrollTo({
       left: 0,
@@ -12,10 +15,17 @@ const Navigation = () => {
     })
   }
 
+  const isIndexPage = location.pathname === '/'
+  const link = isIndexPage ? (
+    <Link to={'/'}>Home</Link>
+  ) : (
+    <a onClick={() => navigate(-1)}>Back</a>
+  )
+
   return (
     <div className={styles.Container}>
       <div className={styles.Wrapper}>
-        <Link to={'/'}>Home</Link>
+        {link}
         <div onClick={onClick} className={styles.Up}>
           Up
         </div>

@@ -26,6 +26,7 @@ export interface volumeInfo {
   language?: string
   title?: string
   publishedDate?: string
+  averageRating?: number
 }
 
 export enum Category {

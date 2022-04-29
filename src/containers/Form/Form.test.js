@@ -15,7 +15,7 @@ beforeEach(() => {
 describe('Form', () => {
   test('button disabled initially', async () => {
     expect(screen.getByRole('button')).toBeDisabled()
-    await userEvent.type(screen.getByRole('input'), 'Steve')
+    // await userEvent.type(screen.getByRole('input'), 'Steve')
   })
   test('button is not disabled after input changed', async () => {
     await userEvent.type(screen.getByRole('input'), 'Steve')

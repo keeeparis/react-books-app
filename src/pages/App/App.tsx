@@ -4,7 +4,6 @@ import Form from '../../containers/Form'
 import FoundResults from '../../containers/FoundResults'
 import LoadingSection from '../../containers/LoadingSection'
 import SortingSection from '../../containers/SortingSection'
-import styles from './App.module.scss'
 
 // количество отображаемых записей на странице
 export const BOOKS_PER_PAGE = 30
