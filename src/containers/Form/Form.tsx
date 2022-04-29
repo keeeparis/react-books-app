@@ -16,16 +16,14 @@ const Form = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (input !== stateInput) {
-      // dispatch только если мы изменили инпут формы
-      // и он отличается от инпута global state
-      dispatch(updateInputAndResetIndex(input))
-    }
+    dispatch(updateInputAndResetIndex(input))
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
   }
+
+  const isButtonDisabled = !input || input === stateInput
 
   return (
     <div>
@@ -37,7 +35,7 @@ const Form = () => {
           placeholder="Я ищу..."
           role="input"
         />
-        <Button type="submit" disabled={!input} role="button">
+        <Button type="submit" disabled={isButtonDisabled} role="button">
           Поиск
         </Button>
       </form>
