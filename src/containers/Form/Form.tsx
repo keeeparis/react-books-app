@@ -23,6 +23,10 @@ const Form = () => {
     setInput(e.target.value)
   }
 
+  const resetInput = () => {
+    setInput('')
+  }
+
   const isButtonDisabled = !input || input === stateInput
 
   return (
@@ -31,6 +35,7 @@ const Form = () => {
         <Input
           type="text"
           onChange={onInputChange}
+          resetInput={resetInput}
           value={input}
           placeholder="Я ищу..."
           role="input"
