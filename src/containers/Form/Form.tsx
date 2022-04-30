@@ -8,6 +8,7 @@ import styles from './Form.module.scss'
 import { updateInputAndResetIndex } from '../../redux/mainFeature/mainSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks'
 import { selectInput } from '../../redux/mainFeature/selectors'
+import { saveSearchHistoryToLocalStorage } from '../../utils/saveSearchHistoryToLS'
 
 const Form = () => {
   // to save input value after switching pages
@@ -19,10 +20,17 @@ const Form = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(updateInputAndResetIndex(input))
+    /* Сохранение истории поиска в localstorage */
+    saveSearchHistoryToLocalStorage(input)
   }
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
+  }
+
+  const handleHistorySearchClick = (option: string) => () => {
+    setInput(option)
+    dispatch(updateInputAndResetIndex(option))
   }
 
   const resetInput = () => {
@@ -36,10 +44,12 @@ const Form = () => {
       <form onSubmit={onSubmit} className={styles.form} role="form">
         <Input
           type="text"
-          onChange={onInputChange}
-          resetInput={resetInput}
           value={input}
+          resetInput={resetInput}
+          onChange={onInputChange}
+          handleHistorySearchClick={handleHistorySearchClick}
           placeholder={t('search-placeholder')}
+          stateInput={stateInput}
           role="input"
         />
         <Button type="submit" disabled={isButtonDisabled} role="button">
