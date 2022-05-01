@@ -12,6 +12,12 @@
   }
 }
 
+@media (max-width: 660px) {
+  .History {
+    top: 55px;
+  }
+}
+
 .HistoryItem {
   display: flex;
   align-items: center;

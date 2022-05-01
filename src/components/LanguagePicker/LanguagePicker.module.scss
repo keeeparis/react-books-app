@@ -8,13 +8,6 @@
   }
 
   > div {
-    width: 100px;
-    color: black;
-  }
-}
-
-@media (max-width: 660px) {
-  .Wrapper > div {
     width: 85px;
     color: white;
     background-color: transparent;
