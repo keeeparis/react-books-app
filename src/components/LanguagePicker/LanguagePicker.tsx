@@ -13,9 +13,15 @@ const LanguagePicker = () => {
     i18n.changeLanguage(lang)
   }
 
+  const transformInitialLanguage = (lang: string) => lang.split('-')[0]
+
   return (
     <div className={styles.Wrapper}>
-      <Select data={languages} onClick={changeLanguage} value={i18n.language} />
+      <Select
+        data={languages}
+        onClick={changeLanguage}
+        value={transformInitialLanguage(i18n.language)}
+      />
     </div>
   )
 }
