@@ -24,5 +24,6 @@
   "poetry": "poetry",
   "fiction": "fiction",
   "relevance": "relevance",
-  "newest": "newest"
+  "newest": "newest",
+  "search-history": "Search history"
 }

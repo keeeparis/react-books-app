@@ -1,0 +1,33 @@
+.Wrapper {
+  display: flex;
+  gap: 16px;
+
+  button span {
+    font-size: 1.5em;
+    color: black;
+  }
+
+  > div {
+    width: 100px;
+    color: black;
+  }
+}
+
+@media (max-width: 660px) {
+  .Wrapper > div {
+    width: 85px;
+    color: white;
+    background-color: transparent;
+    box-shadow: none;
+    margin-right: -10px;
+
+    &::after {
+      border-color: inherit;
+    }
+
+    > div,
+    > div:hover {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { resetBooks, updateTotalItemsResponse } from '../mainFeature/mainSlice'
+import { resetBooks } from '../mainFeature/mainSlice'
 import { BOOKS_PER_PAGE } from '../../pages/App'
 import { RootState } from '../store/store'
 import { Book, Category, Sorting } from '../types'
@@ -36,6 +36,7 @@ export const booksApi = createApi({
       },
       async onQueryStarted(data, { dispatch, getState }) {
         const state = getState() as RootState
+
         /* При новом запросе (startIndex = 0) -> очищай массив книг,
         чтобы показать крутящийся спиннер */
         state.main.startIndex === 0 && dispatch(resetBooks())

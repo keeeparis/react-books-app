@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Translation from '../../components/Translation'
+import Translation from '../../components/LanguagePicker'
 
 import styles from './Navigation.module.scss'
 
