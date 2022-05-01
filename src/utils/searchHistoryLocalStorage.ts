@@ -1,5 +1,6 @@
 export const saveSearchHistoryToLocalStorage = (data: string) => {
   const searchHistory = localStorage.getItem('search-history')
+
   if (searchHistory) {
     const newSearchHistory: string[] = JSON.parse(searchHistory)
 
@@ -18,14 +19,16 @@ export const saveSearchHistoryToLocalStorage = (data: string) => {
 
 export const removeSearchHistoryFromLocalstorage = (data: string) => {
   const searchHistory = localStorage.getItem('search-history')
-  console.log(data)
+
   if (searchHistory) {
     const newSearchHistory: string[] = JSON.parse(searchHistory)
     const filtered = newSearchHistory.filter((search) => search !== data)
+
     if (filtered.length) {
       localStorage.setItem('search-history', JSON.stringify(filtered))
     } else {
       localStorage.removeItem('search-history')
+      // localStorage.setItem('search-history', JSON.stringify([]))
     }
   }
 }

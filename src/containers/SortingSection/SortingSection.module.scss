@@ -1,6 +1,10 @@
 .wrapper {
   display: flex;
   gap: 40px;
+
+  > div {
+    width: 250px;
+  }
 }
 
 @media (max-width: 660px) {

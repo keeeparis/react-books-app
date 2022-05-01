@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-const useLocalStorage = (
+const useUpdateLocalStorage = (
   storageName: string,
   dispatchaction: any,
   dependantvalue: string
@@ -15,4 +15,4 @@ const useLocalStorage = (
   return
 }
 
-export default useLocalStorage
+export default useUpdateLocalStorage
