@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Emoji Component 1`] = `
+<DocumentFragment>
+  <span
+    aria-hidden="false"
+    aria-label="books"
+    class="emoji"
+    role="img"
+  >
+    📚
+  </span>
+</DocumentFragment>
+`;

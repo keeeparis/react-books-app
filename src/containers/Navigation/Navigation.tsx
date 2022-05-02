@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Translation from '../../components/LanguagePicker'
+import LanguagePicker from '../../components/LanguagePicker'
 
 import styles from './Navigation.module.scss'
 
@@ -22,7 +22,7 @@ const Navigation = () => {
       <div className={styles.Wrapper}>
         {link}
         <div className={styles.RightSide}>
-          <Translation />
+          <LanguagePicker />
         </div>
       </div>
     </div>

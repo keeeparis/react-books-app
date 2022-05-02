@@ -1,24 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`test Navigation Component 1`] = `
-<div
-  className="Container"
->
+<DocumentFragment>
   <div
-    className="Wrapper"
+    class="Container"
   >
-    <a
-      href="/"
-      onClick={[Function]}
-    >
-      Home
-    </a>
     <div
-      className="Up"
-      onClick={[Function]}
+      class="Wrapper"
     >
-      Up
+      <a
+        href="/"
+      >
+        Home
+      </a>
+      <div
+        class="RightSide"
+      >
+        <div
+          class="Wrapper"
+        >
+          <div
+            class="select"
+          >
+            <div
+              class="selectShow"
+              role="selected"
+              tabindex="0"
+            >
+              en
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test FoundResults Component 1`] = `<DocumentFragment />`;
+
+exports[`test FoundResults Component 2`] = `
+<DocumentFragment>
+  <div
+    class="wrapper fade-appear fade-appear-active"
+  >
+    Found 200 results
+  </div>
+</DocumentFragment>
+`;

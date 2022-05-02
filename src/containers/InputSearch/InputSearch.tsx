@@ -54,6 +54,7 @@ const InputSearch = forwardRef<HTMLInputElement, InputProps>(
         <button
           className={cn(styles.Close, { [styles.visible]: !!value })}
           onClick={resetInput}
+          role="resetButton"
           type="reset"
         >
           &#215;

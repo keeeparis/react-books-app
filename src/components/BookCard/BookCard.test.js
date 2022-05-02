@@ -1,10 +1,7 @@
-import renderer from 'react-test-renderer'
 import BookCard from './BookCard'
-import Fade from '../../containers/Fade'
-import { MemoryRouter } from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group'
 import { Category } from '../../redux/types'
 import { transformAuthors, transformCategory, transformImage } from './helper'
+import { render, screen, fireEvent, userEvent } from 'test-utils'
 
 const book = {
   categories: [Category.ART, Category.FICTION],
@@ -21,15 +18,10 @@ jest.mock('react-transition-group', () => {
   return { CSSTransition: FakeTransition }
 })
 
-it('test BookCard Component', () => {
-  const component = renderer.create(
-    <MemoryRouter>
-      <BookCard book={book} id={1} />
-    </MemoryRouter>
-  )
+test('test BookCard Component', () => {
+  const { asFragment } = render(<BookCard book={book} id={1} />)
 
-  let tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
+  expect(asFragment()).toMatchSnapshot()
 })
 
 describe('testing transform Categories', () => {

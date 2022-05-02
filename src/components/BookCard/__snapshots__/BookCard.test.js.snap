@@ -1,48 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`test BookCard Component 1`] = `
-<a
-  href="/book/1"
-  onClick={[Function]}
->
-  <div
-    className="container"
-    title="Crime and Punishment"
+<DocumentFragment>
+  <a
+    href="/book/1"
   >
     <div
-      className="imageWrapper"
+      class="container"
+      title="Crime and Punishment"
     >
-      <img
-        alt="picture"
-        loading="lazy"
-        src="https://some-url.com"
-      />
-    </div>
-    <div
-      className="category"
-    >
-      Art
-    </div>
-    <div
-      className="title"
-    >
-      Crime and Punishment
-    </div>
-    <div
-      className="authorWrapper"
-    >
-      <h4
-        className="author"
+      <div
+        class="imageWrapper"
       >
-        Conan Doyle
-        ,
-      </h4>
-      <h4
-        className="author"
+        <img
+          alt="picture"
+          loading="lazy"
+          src="https://some-url.com"
+        />
+      </div>
+      <div
+        class="category"
       >
-        Richard Dawkins
-      </h4>
+        art
+      </div>
+      <div
+        class="title"
+      >
+        Crime and Punishment
+      </div>
+      <div
+        class="authorWrapper"
+      >
+        <h4
+          class="author"
+        >
+          Conan Doyle,
+        </h4>
+        <h4
+          class="author"
+        >
+          Richard Dawkins
+        </h4>
+      </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;

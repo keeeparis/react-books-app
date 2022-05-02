@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test LanguagePicker Component 1`] = `
+<DocumentFragment>
+  <div
+    class="Wrapper"
+  >
+    <div
+      class="select"
+    >
+      <div
+        class="selectShow"
+        role="selected"
+        tabindex="0"
+      >
+        en
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

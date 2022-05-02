@@ -10,6 +10,24 @@ const props = {
   onClick: jest.fn(),
 }
 
+const props2 = {
+  data: sorting,
+  value: sorting[0],
+  onClick: jest.fn(),
+}
+
+it('test Select with categories Component', () => {
+  const { asFragment } = render(<Select {...props} />)
+
+  expect(asFragment()).toMatchSnapshot()
+})
+
+it('test Select with sorting Component', () => {
+  const { asFragment } = render(<Select {...props2} />)
+
+  expect(asFragment()).toMatchSnapshot()
+})
+
 beforeEach(() => {
   render(<Select {...props} />)
 })

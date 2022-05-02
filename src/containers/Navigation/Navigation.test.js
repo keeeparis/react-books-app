@@ -1,14 +1,8 @@
-import { MemoryRouter } from 'react-router-dom'
-import renderer from 'react-test-renderer'
+import { render, screen, fireEvent, userEvent } from 'test-utils'
 import Navigation from './Navigation'
 
 it('test Navigation Component', () => {
-  const component = renderer.create(
-    <MemoryRouter>
-      <Navigation />
-    </MemoryRouter>
-  )
+  const { asFragment } = render(<Navigation />)
 
-  let tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
+  expect(asFragment()).toMatchSnapshot()
 })

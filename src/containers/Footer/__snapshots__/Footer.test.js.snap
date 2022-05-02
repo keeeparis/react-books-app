@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Footer Component 1`] = `
+<DocumentFragment>
+  <div
+    class="Wrapper"
+  >
+    <div
+      class="Up"
+    >
+      ↑
+    </div>
+  </div>
+</DocumentFragment>
+`;

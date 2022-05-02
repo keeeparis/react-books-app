@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test SortingSection Component 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <div
+      class="select"
+    >
+      <div
+        class="selectShow"
+        role="selected"
+        tabindex="0"
+      >
+        all
+      </div>
+    </div>
+    <div
+      class="select"
+    >
+      <div
+        class="selectShow"
+        role="selected"
+        tabindex="0"
+      >
+        relevance
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
